@@ -5,3 +5,5 @@ public/
 db.json
 .cache/
 .deploy_git/
+
+_posts_tmp/
