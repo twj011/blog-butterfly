@@ -2,9 +2,9 @@
   "name": "blog",
   "private": true,
   "scripts": {
-    "build": "hexo clean && hexo generate",
-    "server": "hexo server",
-    "clean": "hexo clean"
+    "build": "node ./node_modules/hexo-cli/bin/hexo clean && node ./node_modules/hexo-cli/bin/hexo generate",
+    "server": "node ./node_modules/hexo-cli/bin/hexo server",
+    "clean": "node ./node_modules/hexo-cli/bin/hexo clean"
   },
   "dependencies": {
     "hexo-cli": "^4.3.2",
