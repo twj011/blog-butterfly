@@ -18,10 +18,23 @@ nav:
   fixed: false
 
 menu:
-  # Home: / || fas fa-home
-  # List||fas fa-list:
-  #   Music: /music/ || fas fa-music
-  #   Movie: /movies/ || fas fa-video
+  Home: / || fas fa-home
+  网页||fas fa-globe:
+    GitHub: https://github.com || fab fa-github
+    bilibili: https://www.bilibili.com/ || fas fa-tv
+    fofa: https://fofa.info/ || fas fa-search
+    linuxdo: https://linux.do || fab fa-linux
+    nodeloc: https://nodeloc.com/ || fas fa-server
+    idcflare: https://idcflare.com/ || fas fa-cloud
+    nodeseek: https://nodeseek.com/ || fas fa-compass
+  项目||fas fa-code:
+    telegraph图床: https://telegraph.ttwwjj.ddns-ip.net/ || fas fa-image
+  导航站||fas fa-map-signs:
+    twj0/nav: https://twj0.github.io/nav || fas fa-map
+    eooce nav: https://nav.eooce.com/ || fas fa-location-arrow
+    toolify.ai: https://www.toolify.ai/zh/ || fas fa-wand-magic-sparkles
+  域名||fas fa-link:
+    domain.digitalplat.org: https://domain.digitalplat.org/ || fas fa-globe
 
 # --------------------------------------
 # Code Blocks Settings
@@ -49,7 +62,7 @@ copy:
 # --------------------------------------
 
 # Favicon（网站图标）
-favicon: /favicon.ico
+favicon: /img/favicon.ico
 
 # Avatar (头像)
 # 文章底部的作者头像和侧边矩形的博主头像
