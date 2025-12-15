@@ -1,6 +1,9 @@
 {
   "name": "blog",
   "private": true,
+  "hexo": {
+    "version": "6.3.0"
+  },
   "scripts": {
     "build": "node ./node_modules/hexo/bin/hexo clean && node ./node_modules/hexo/bin/hexo generate",
     "server": "node ./node_modules/hexo/bin/hexo server",
