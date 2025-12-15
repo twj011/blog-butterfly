@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中文语言检测功能测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .test-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .result-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .test-case {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+            border-left: 4px solid #3498db;
+        }
+        .test-case h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        .test-text {
+            font-style: italic;
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .test-result {
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .failure {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            font-size: 12px;
+            display: none;
+        }
+        .details-toggle {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-size: 12px;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .stats-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>中文语言检测功能测试</h1>
+    
+    <div class="input-section">
+        <h2>自定义测试</h2>
+        <textarea id="customInput" placeholder="在此输入要测试的中文文本..."></textarea>
+        <button onclick="testCustomText()">检测语言</button>
+        <div id="customResult"></div>
+    </div>
+
+    <div class="container">
+        <div class="test-section">
+            <h2>测试用例</h2>
+            
+            <div class="test-case">
+                <h3>简体中文测试</h3>
+                <div class="test-text">我喜欢使用电脑学习编程，这是一个很好的习惯。我们应该珍惜时间，努力学习新技术。</div>
+                <button onclick="runTest('simplified')">运行测试</button>
+                <div id="simplified-result"></div>
+            </div>
+            
+            <div class="test-case">
+                <h3>繁体中文测试</h3>
+                <div class="test-text">我喜歡使用電腦學習編程，這是一個很好的習慣。我們應該珍惜時間，努力學習新技術。</div>
+                <button onclick="runTest('traditional')">运行测试</button>
+                <div id="traditional-result"></div>
+            </div>
+            
+            <div class="test-case">
+                <h3>混合中文测试</h3>
+                <div class="test-text">我喜歡使用电脑学习编程，这是一个很好的习惯。我们应该珍惜时间，努力学习新技术。</div>
+                <button onclick="runTest('mixed')">运行测试</button>
+                <div id="mixed-result"></div>
+            </div>
+            
+            <div class="test-case">
+                <h3>非中文测试</h3>
+                <div class="test-text">Hello World! This is a test for English text detection.</div>
+                <button onclick="runTest('non-chinese')">运行测试</button>
+                <div id="non-chinese-result"></div>
+            </div>
+            
+            <div class="test-case">
+                <h3>边界情况测试</h3>
+                <div class="test-text">123!@#$%^&*()_+-=[]{}|;':",./<>?</div>
+                <button onclick="runTest('edge-case')">运行测试</button>
+                <div id="edge-case-result"></div>
+            </div>
+            
+            <div class="test-case">
+                <h3>空输入测试</h3>
+                <div class="test-text"></div>
+                <button onclick="runTest('empty')">运行测试</button>
+                <div id="empty-result"></div>
+            </div>
+        </div>
+        
+        <div class="result-section">
+            <h2>测试结果</h2>
+            <div id="test-summary"></div>
+            <div id="detailed-results"></div>
+        </div>
+    </div>
+
+    <script src="chinese-language-detector.js"></script>
+    <script>
+        // 测试用例数据
+        const testCases = {
+            'simplified': {
+                text: '我喜欢使用电脑学习编程，这是一个很好的习惯。我们应该珍惜时间，努力学习新技术。',
+                expected: 'simplified',
+                description: '简体中文测试'
+            },
+            'traditional': {
+                text: '我喜歡使用電腦學習編程，這是一個很好的習慣。我們應該珍惜時間，努力學習新技術。',
+                expected: 'traditional',
+                description: '繁体中文测试'
+            },
+            'mixed': {
+                text: '我喜歡使用电脑学习编程，这是一个很好的习惯。我们应该珍惜时间，努力学习新技术。',
+                expected: 'mixed',
+                description: '混合中文测试'
+            },
+            'non-chinese': {
+                text: 'Hello World! This is a test for English text detection.',
+                expected: 'non-chinese',
+                description: '非中文测试'
+            },
+            'edge-case': {
+                text: '123!@#$%^&*()_+-=[]{}|;\'":",./<>?',
+                expected: 'non-chinese',
+                description: '边界情况测试'
+            },
+            'empty': {
+                text: '',
+                expected: 'unknown',
+                description: '空输入测试'
+            }
+        };
+
+        // 运行单个测试
+        function runTest(testId) {
+            const testCase = testCases[testId];
+            const result = ChineseLanguageDetector.detectChineseLanguage(testCase.text);
+            
+            let resultClass = 'info';
+            let resultText = '';
+            
+            if (result.language === testCase.expected) {
+                resultClass = 'success';
+                resultText = `✅ 测试通过: ${result.message}`;
+            } else {
+                resultClass = 'failure';
+                resultText = `❌ 测试失败: 期望 ${testCase.expected}, 实际 ${result.language}`;
+            }
+            
+            if (result.language === 'error') {
+                resultClass = 'warning';
+                resultText = `⚠️ 错误: ${result.message}`;
+            }
+            
+            const resultHtml = `
+                <div class="test-result ${resultClass}">
+                    ${resultText}
+                    <div class="details-toggle" onclick="toggleDetails('${testId}-details')">显示/隐藏详情</div>
+                    <div id="${testId}-details" class="details">
+                        <strong>检测结果:</strong> ${result.language}<br>
+                        <strong>置信度:</strong> ${result.confidence}<br>
+                        <strong>简体比例:</strong> ${(result.details.simplifiedRatio * 100).toFixed(2)}%<br>
+                        <strong>繁体比例:</strong> ${(result.details.traditionalRatio * 100).toFixed(2)}%<br>
+                        <strong>混合比例:</strong> ${(result.details.mixedRatio * 100).toFixed(2)}%<br>
+                        <strong>中文字符比例:</strong> ${(result.details.chineseRatio * 100).toFixed(2)}%
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById(`${testId}-result`).innerHTML = resultHtml;
+            
+            // 更新测试摘要
+            updateTestSummary();
+        }
+
+        // 测试自定义文本
+        function testCustomText() {
+            const text = document.getElementById('customInput').value;
+            const result = ChineseLanguageDetector.detectChineseLanguage(text);
+            const stats = ChineseLanguageDetector.getChineseCharacterStats(text);
+            
+            let resultClass = 'info';
+            let resultText = `检测结果: ${result.message}`;
+            
+            if (result.language === 'error') {
+                resultClass = 'warning';
+            }
+            
+            let statsHtml = '';
+            if (!stats.error) {
+                statsHtml = `
+                    <h4>字符统计</h4>
+                    <table class="stats-table">
+                        <tr><th>总字符数</th><td>${stats.totalCharacters}</td></tr>
+                        <tr><th>中文字符数</th><td>${stats.chineseCharacters}</td></tr>
+                        <tr><th>简体字符数</th><td>${stats.simplifiedCharacters}</td></tr>
+                        <tr><th>繁体字符数</th><td>${stats.traditionalCharacters}</td></tr>
+                        <tr><th>通用字符数</th><td>${stats.commonCharacters}</td></tr>
+                        <tr><th>非中文字符数</th><td>${stats.nonChineseCharacters}</td></tr>
+                        <tr><th>简体词汇数</th><td>${stats.simplifiedWords}</td></tr>
+                        <tr><th>繁体词汇数</th><td>${stats.traditionalWords}</td></tr>
+                    </table>
+                `;
+            }
+            
+            const resultHtml = `
+                <div class="test-result ${resultClass}">
+                    ${resultText}<br>
+                    <strong>语言类型:</strong> ${result.language}<br>
+                    <strong>置信度:</strong> ${(result.confidence * 100).toFixed(2)}%<br>
+                    <strong>简体比例:</strong> ${(result.details.simplifiedRatio * 100).toFixed(2)}%<br>
+                    <strong>繁体比例:</strong> ${(result.details.traditionalRatio * 100).toFixed(2)}%
+                </div>
+                ${statsHtml}
+            `;
+            
+            document.getElementById('customResult').innerHTML = resultHtml;
+        }
+
+        // 切换详情显示
+        function toggleDetails(detailsId) {
+            const details = document.getElementById(detailsId);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+
+        // 更新测试摘要
+        function updateTestSummary() {
+            let passed = 0;
+            let failed = 0;
+            let total = 0;
+            
+            for (const testId in testCases) {
+                const resultElement = document.getElementById(`${testId}-result`);
+                if (resultElement && resultElement.innerHTML) {
+                    total++;
+                    if (resultElement.innerHTML.includes('测试通过')) {
+                        passed++;
+                    } else if (resultElement.innerHTML.includes('测试失败')) {
+                        failed++;
+                    }
+                }
+            }
+            
+            const summaryHtml = `
+                <h3>测试摘要</h3>
+                <p>总测试数: ${total}</p>
+                <p>通过: ${passed}</p>
+                <p>失败: ${failed}</p>
+                <p>成功率: ${total > 0 ? ((passed / total) * 100).toFixed(2) : 0}%</p>
+            `;
+            
+            document.getElementById('test-summary').innerHTML = summaryHtml;
+        }
+
+        // 页面加载时运行所有测试
+        window.onload = function() {
+            console.log('中文语言检测功能测试页面已加载');
+        };
+    </script>
+</body>
+</html>

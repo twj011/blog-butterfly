@@ -1,0 +1,14 @@
+title: My Blog
+subtitle: ''
+description: ''
+author: ''
+language: zh-CN
+timezone: Asia/Shanghai
+
+url: https://example.pages.dev
+root: /
+permalink: :year/:month/:day/:title/
+
+source_dir: ../source
+
+theme: butterfly
