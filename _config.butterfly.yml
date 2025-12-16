@@ -413,9 +413,9 @@ footer:
     cc:
       enable: false
       link: /copyright
-    linkList:
-      - link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
-        text: 主题
+    # linkList:
+      # - link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
+        # text: 主题
       # - link: https://image.anheyu.com
       #   text: 图床
       # - link: https://beian.miit.gov.cn/
@@ -473,7 +473,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/twj0
   card_announcement:
     enable: true
     content: This is my Blog
