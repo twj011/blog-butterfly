@@ -1,11 +1,11 @@
-title: My Blog
+title: twj0-blog
 subtitle: ''
 description: ''
 author: ''
 language: zh-CN
 timezone: Asia/Shanghai
 
-url: https://example.pages.dev
+url: https://blog.ttwj.de5.net
 root: /
 permalink: :year/:month/:day/:title/
 
